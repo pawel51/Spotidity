@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="Spotidity.Views.CategoryPlaylistsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Spotidity.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="570" d:DesignWidth="800">
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid.Resources>
+            <DataTemplate x:Key="PlaylistSenderTemplate">
+                <Button Content="{Binding Name}"
+                        Command="{Binding GoToPlaylistTracksCMD}"/>
+            </DataTemplate>
+            <DataTemplate x:Key="DescriptionTemplate">
+                <Border Padding="10,0,0,0">
+                    <TextBlock Text="{Binding Path=Description}" TextWrapping="Wrap" MaxWidth="551"/>
+                </Border>
+            </DataTemplate>
+        </Grid.Resources>
+
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="30,10,0,0">
+
+            <TextBlock Text="{Binding SpotiCategory.Name}" FontSize="40" FontFamily="Miriam Mono CLM" FontStyle="Italic" Foreground="#FFFBFAFA" FontWeight="Bold"/>
+            <TextBlock Text="playlists" FontSize="40" FontFamily="Miriam Mono CLM" FontStyle="Italic" Foreground="#FFFBFAFA" FontWeight="Bold"/>
+        </StackPanel>
+
+        <DataGrid Grid.Row="2" Grid.Column="0"
+                  x:Name="CategoryPlaylists" 
+                  AutoGenerateColumns="False" Margin="5,5,15,5"
+                  ItemsSource="{Binding Path=CategoryPlaylists.Result}"
+                  ScrollViewer.CanContentScroll="True"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                  Width="800">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Name" Width="Auto"
+                                        CellTemplate="{StaticResource PlaylistSenderTemplate}">
+
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Owner" Binding="{Binding Path=OwnerName}"/>
+                <DataGridTemplateColumn Header="Description" CellTemplate="{StaticResource DescriptionTemplate}"/>
+                <!--<DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" MaxWidth="561"/>-->
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+    </Grid>
+</UserControl>
