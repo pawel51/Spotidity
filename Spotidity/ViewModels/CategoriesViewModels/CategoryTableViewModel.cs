@@ -26,23 +26,6 @@ namespace Spotidity.ViewModels
             set { _Categories = value; OnPropertyChanged(nameof(Categories)); }
         }
 
-        private RelayCommand _SearchCMD;
-        public RelayCommand SearchCMD
-        {
-            get
-            {
-                if (_SearchCMD == null)
-                    _SearchCMD = new RelayCommand(param => this.Search(), param => this.CanSearch());
-                return _SearchCMD;
-            }
-            set { _SearchCMD = value; }
-        }
-
-
-        public ICommand ReturnHome { get; }
-
-
-
 
         #endregion
 
@@ -50,7 +33,6 @@ namespace Spotidity.ViewModels
 
         public CategoryTableViewModel()
         {
-            NavigationStore navigationStore = NavigationStore.GetInstace();
 
             Categories = new NotifyTaskCompletion<ObservableCollection<SpotiCategory>>
                 (
@@ -59,24 +41,11 @@ namespace Spotidity.ViewModels
 
 
 
-            ReturnHome = new NavigateCMD<HomeViewModel>(new NavigationService<HomeViewModel>
-                (
-                navigationStore, () => new HomeViewModel(new Credentials("", ""))
-                ));
-        }
-        #endregion
-
-
-
-        #region Methods
-        private bool CanSearch()
-        {
-            return true;
         }
 
-        private void Search()
+        public override BaseViewModel DeepClone()
         {
-            throw new NotImplementedException();
+            return new CategoryTableViewModel();
         }
         #endregion
 

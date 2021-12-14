@@ -15,14 +15,6 @@ namespace Spotidity.ViewModels
     {
         private readonly Credentials _credentials;
 
-        
-        public ICommand GoToCategoriesCMD { get; }
-        public ICommand GoToArtistsCMD { get; }
-        public ICommand GoToPlaylistsCMD { get; }
-        public ICommand GoToTracksCMD { get; }
-
-
-
         public string ValAppId => _credentials.ValAppId;
 
         public string ValSecret => _credentials.ValSecret;
@@ -30,15 +22,11 @@ namespace Spotidity.ViewModels
         public HomeViewModel(Credentials creds)
         {
             _credentials = creds;
-            NavigationStore navigationStore = NavigationStore.GetInstace();
+        }
 
-            GoToCategoriesCMD = new NavigateCMD<CategoryTableViewModel>(new NavigationService<CategoryTableViewModel>
-                (
-                navigationStore, () => new CategoryTableViewModel()
-                ));
-
-
-            
-        } 
+        public override BaseViewModel DeepClone()
+        {
+            return (HomeViewModel)this.MemberwiseClone();
+        }
     }
 }

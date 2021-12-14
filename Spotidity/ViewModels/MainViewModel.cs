@@ -38,8 +38,9 @@ namespace Spotidity.ViewModels
             OnPropertyChanged(nameof(CurrentViewModel));
         }
 
-
-
-
+        public override BaseViewModel DeepClone()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

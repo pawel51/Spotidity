@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
 
 
-        <TextBlock Text="HOME VIEW CONTENT" FontSize="48" Foreground="#FF78F312" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20,10,20,20"/>
+        <TextBlock Text="W E L C O M E !" FontSize="48" Foreground="#FF78F312" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20,10,20,20"/>
 
 
 

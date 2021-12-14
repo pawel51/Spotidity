@@ -5,15 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Spotidity.Views"
              mc:Ignorable="d" 
-             xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+             
              Height="570"
              >
     <UserControl.Resources>
-        
     </UserControl.Resources>
+    
     <Grid >
+        
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="3*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
 
@@ -24,7 +26,9 @@
                 </Border>
             </DataTemplate>
             <DataTemplate x:Key="ArtistsSenderTemplate">
-                <ComboBox ItemsSource="{Binding Path=Artists}" SelectedItem="{Binding SelectedArtist}" VerticalAlignment="Center" Height="32">
+                <ComboBox ItemsSource="{Binding Path=Artists}" 
+                          SelectedItem="{Binding SelectedArtist}" 
+                          VerticalAlignment="Center" Height="32">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <Border Padding="5">
@@ -47,7 +51,7 @@
             <DataTemplate x:Key="AlbumSenderTemplate">
                 <Border>
                     <Button 
-                        Command="{Binding GoToAlbum}">
+                        Command="{Binding GoToAlbumCMD}">
                         <Border Padding="5">
                             <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding Album.Name}"/>
                         </Border>
@@ -62,7 +66,7 @@
         </Grid.Resources>
 
         <StackPanel Grid.Row="0">
-            <StackPanel  Orientation="Horizontal" Margin="30,10,0,0">
+            <StackPanel  Orientation="Horizontal" Margin="60,10,0,0">
                 <!--<Button Width="40" Height="40" Margin="0,0,10,10">
                     <Image Source="{svgc:SvgImage Source=../Resources/home.svg}"/>
                 </Button>-->
@@ -71,7 +75,7 @@
                 <TextBlock Text=" tracks" FontSize="40" FontFamily="Miriam Mono CLM" FontStyle="Italic" Foreground="#FFFBFAFA" FontWeight="Bold"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding SpotiPlaylist.Description}" Margin="30,0,0,0" FontSize="20" FontFamily="Miriam Mono CLM" FontStyle="Italic" Foreground="#FFFBFAFA" FontWeight="Bold"/>
+                <TextBlock Text="{Binding SpotiPlaylist.Description}" Margin="60,0,0,0" FontSize="20" FontFamily="Miriam Mono CLM" FontStyle="Italic" Foreground="#FFFBFAFA" FontWeight="Bold" MaxWidth="750" TextWrapping="Wrap"/>
             </StackPanel>
             
         </StackPanel>

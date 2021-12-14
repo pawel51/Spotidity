@@ -14,6 +14,22 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\pawel\source\publish\Spotidity\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,10 +50,24 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>3EF5BEAA4D7C83C81C8901A8C26C1B4F7ADF511B</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Spotidity_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="SharpVectors.Converters.Wpf, Version=1.7.6.0, Culture=neutral, PublicKeyToken=b532964b8548be77, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpVectors.1.7.6\lib\net47\SharpVectors.Converters.Wpf.dll</HintPath>
     </Reference>
@@ -69,6 +99,7 @@
       <HintPath>..\packages\SpotifyAPI.Web.Auth.5.1.1\lib\netstandard2.0\SpotifyAPI.Web.Auth.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -86,43 +117,55 @@
       <HintPath>..\packages\Unosquare.Swan.Lite.1.3.1\lib\net461\Unosquare.Swan.Lite.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Builder\CommandBuilders\BaseCommandBuilder.cs" />
+    <Compile Include="Builder\SpotiBuilders\BaseSpotiBuilder.cs" />
+    <Compile Include="Builder\SpotiBuilders\TrackBuilder.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
-    <Compile Include="Commands\LoginCMD.cs" />
+    <Compile Include="Commands\NavigateBackCMD.cs" />
     <Compile Include="Commands\NavigateCMD.cs" />
-    <Compile Include="Commands\NavigateParamCMD.cs" />
+    <Compile Include="Commands\NavigateForwardCMD.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\ISpotiModel.cs" />
+    <Compile Include="Models\SpotiAlbum.cs" />
+    <Compile Include="Models\SpotiArtist.cs" />
     <Compile Include="Models\SpotiPlaylist.cs" />
     <Compile Include="Models\Credentials.cs" />
     <Compile Include="Models\SpotiCategory.cs" />
     <Compile Include="Models\SpotiTrack.cs" />
     <Compile Include="Services\ApiService.cs" />
+    <Compile Include="Services\BackNavigationService.cs" />
+    <Compile Include="Services\ForwardNavigationService.cs" />
     <Compile Include="Services\NavigationService.cs" />
-    <Compile Include="Services\ParamNavigationService.cs" />
     <Compile Include="Stores\NavigationStore.cs" />
     <Compile Include="ViewModels\AlbumsViewModels\AlbumsTableViewModel.cs" />
+    <Compile Include="ViewModels\AlbumsViewModels\AlbumTracksViewModel.cs" />
+    <Compile Include="ViewModels\ArtistsViewModels\ArtistDetailsViewModel.cs" />
     <Compile Include="ViewModels\ArtistsViewModels\ArtistsTableViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CategoriesViewModels\CategoryPlaylistsViewModel.cs" />
     <Compile Include="ViewModels\CategoriesViewModels\CategoryTableViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
-    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\NavigationBarViewModel.cs" />
     <Compile Include="Helpers\AsyncWatch\NotifyTaskCompletion.cs" />
     <Compile Include="ViewModels\PlaylistsViewModels\PlaylistsTableViewModel.cs" />
     <Compile Include="ViewModels\_Shared\PlaylistTracksViewModel.cs" />
     <Compile Include="ViewModels\TracksViewModels\TracksTableViewModel.cs" />
+    <Compile Include="Views\AlbumsViews\AlbumTracksView.xaml.cs">
+      <DependentUpon>AlbumTracksView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AlbumsViews\AlbumsTableView.xaml.cs">
       <DependentUpon>AlbumsTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ArtistsViews\ArtistDetailsView.xaml.cs">
+      <DependentUpon>ArtistDetailsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ArtistsViews\ArtistsTableView.xaml.cs">
       <DependentUpon>ArtistsTableView.xaml</DependentUpon>
@@ -163,7 +206,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\AlbumsViews\AlbumTracksView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AlbumsViews\AlbumsTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ArtistsViews\ArtistDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -227,16 +278,42 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Spotidity_TemporaryKey.pfx" />
+    <Resource Include="Services\secrets.json">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Resource Include="Resources\home.svg" />
+    <Resource Include="Resources\home-circle.png" />
+    <Resource Include="Resources\home-circle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\home-solid.svg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\main.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\search-solid.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\arrow-left-solid.svg" />
+    <Resource Include="Resources\arrow-right-solid.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

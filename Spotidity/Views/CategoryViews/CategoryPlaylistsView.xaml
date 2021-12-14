@@ -28,10 +28,10 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="30,10,0,0">
 
             <TextBlock Text="{Binding SpotiCategory.Name}" FontSize="40" FontFamily="Miriam Mono CLM" FontStyle="Italic" Foreground="#FFFBFAFA" FontWeight="Bold"/>
-            <TextBlock Text="playlists" FontSize="40" FontFamily="Miriam Mono CLM" FontStyle="Italic" Foreground="#FFFBFAFA" FontWeight="Bold"/>
+            <TextBlock Text="  playlists" FontSize="40" FontFamily="Miriam Mono CLM" FontStyle="Italic" Foreground="#FFFBFAFA" FontWeight="Bold"/>
         </StackPanel>
 
-        <DataGrid Grid.Row="2" Grid.Column="0"
+        <DataGrid Grid.Row="1" Grid.Column="0"
                   x:Name="CategoryPlaylists" 
                   AutoGenerateColumns="False" Margin="5,5,15,5"
                   ItemsSource="{Binding Path=CategoryPlaylists.Result}"

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Spotidity.Views.AlbumsViews
+namespace Spotidity.Views
 {
     /// <summary>
-    /// Interaction logic for AlbumsTable.xaml
+    /// Interaction logic for AlbumsTableView.xaml
     /// </summary>
-    public partial class AlbumsTable : UserControl
+    public partial class AlbumsTableView : UserControl
     {
-        public AlbumsTable()
+        public AlbumsTableView()
         {
             InitializeComponent();
         }

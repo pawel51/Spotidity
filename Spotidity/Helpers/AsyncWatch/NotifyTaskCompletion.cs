@@ -1,6 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
+
+namespace Spotidity.Helpers
+{
+
+}
+
 public sealed class NotifyTaskCompletion<TResult> : INotifyPropertyChanged
 {
     public NotifyTaskCompletion(Task<TResult> task)

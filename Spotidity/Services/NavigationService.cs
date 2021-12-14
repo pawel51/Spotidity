@@ -22,6 +22,10 @@ namespace Spotidity.Services
 
         public void Navigate()
         {
+            if (_navigationStore.PrevViewModelList?.Count > 5)
+                _navigationStore.PrevViewModelList.RemoveAt(0);
+
+            _navigationStore.PrevViewModelList.Add(_navigationStore.CurrentViewModel.DeepClone());
             _navigationStore.CurrentViewModel = _createViewModel();
         }
     }

@@ -8,7 +8,8 @@
         xmlns:views="clr-namespace:Spotidity.Views"
         xmlns:viewmodels="clr-namespace:Spotidity.ViewModels"
         xmlns:svgc="http://sharpvectors.codeplex.com/svgc"
-        Icon="/Resources/main.ico">
+        Icon="/Resources/main.ico"
+         ResizeMode="NoResize">
     <StackPanel Orientation="Vertical" Background="#FF0C0B0B">
         <ContentControl Height="60"  Content="{Binding NavbarViewModel}">
             <ContentControl.Resources>
@@ -20,14 +21,29 @@
 
         <ContentControl Height="420" Content="{Binding CurrentViewModel}">
             <ContentControl.Resources>
+                
+                
                 <DataTemplate DataType="{x:Type viewmodels:CategoryTableViewModel}">
                     <views:CategoryTableView/>
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:TracksTableViewModel}">
+                    <views:TracksTableView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:PlaylistsTableViewModel}">
+                    <views:PlaylistsTableView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:ArtistsTableViewModel}">
+                    <views:ArtistsTableView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:AlbumsTableViewModel}">
+                    <views:AlbumsTableView/>
+                </DataTemplate>
+                
+                
+                
+                
                 <DataTemplate DataType="{x:Type viewmodels:CategoryPlaylistsViewModel}">
                     <views:CategoryPlaylistsView/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
-                    <views:LoginView/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
                     <views:HomeView/>
@@ -35,6 +51,14 @@
                 <DataTemplate DataType="{x:Type viewmodels:PlaylistTracksViewModel}">
                     <views:PlaylistTracksView/>
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:AlbumTracksViewModel}">
+                    <views:AlbumTracksView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:ArtistDetailsViewModel}">
+                    <views:ArtistDetailsView/>
+                </DataTemplate>
+                
+                
             </ContentControl.Resources>
             
         </ContentControl>

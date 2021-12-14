@@ -11,6 +11,22 @@ namespace Spotidity.Stores
     {
         public event Action CurrentViewModelChanged;
 
+        private List<BaseViewModel> _PrevViewModelList = new List<BaseViewModel>();
+
+        public List<BaseViewModel> PrevViewModelList
+        {
+            get { return _PrevViewModelList; }
+            set { _PrevViewModelList = value; }
+        }
+
+        private List<BaseViewModel> _NextViewModelList = new List<BaseViewModel>();
+
+        public List<BaseViewModel> NextViewModelList
+        {
+            get { return _NextViewModelList; }
+            set { _NextViewModelList = value; }
+        }
+
         private BaseViewModel _CurrentViewModel;
         public BaseViewModel CurrentViewModel 
         {
@@ -51,7 +67,6 @@ namespace Spotidity.Stores
             }
             return _instance;
         }
-
         #endregion
     }
 }

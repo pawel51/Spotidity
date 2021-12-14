@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Spotidity.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public abstract class BaseViewModel : INotifyPropertyChanged
     {
         
         public event PropertyChangedEventHandler PropertyChanged;
@@ -18,5 +18,7 @@ namespace Spotidity.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public abstract BaseViewModel DeepClone();
     }
 }

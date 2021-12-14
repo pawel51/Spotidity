@@ -4,9 +4,95 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Spotidity.Views"
+             xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="Search Text Here"/>
+             d:DesignHeight="570"
+             d:DesignWidth="1000">
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding SearchCMD}" Key="Enter"/>
+    </UserControl.InputBindings>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.Resources>
+            <DataTemplate x:Key="TrackNameTemplate">
+                <Border Padding="5">
+                    <TextBlock Text="{Binding Path=Name}" TextWrapping="Wrap" MaxWidth="190" VerticalAlignment="Center"/>
+                </Border>
+            </DataTemplate>
+            <DataTemplate x:Key="ArtistsSenderTemplate">
+                <ComboBox ItemsSource="{Binding Path=Artists}" SelectedItem="{Binding SelectedArtist, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="32">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="5">
+                                <TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center" />
+                            </Border>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </DataTemplate>
+            <DataTemplate x:Key="PopularityTemplate">
+                <Border Padding="5">
+                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding Popularity}"/>
+                </Border>
+            </DataTemplate>
+            <DataTemplate x:Key="DurationTemplate">
+                <Border Padding="5">
+                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding DurationStr}"/>
+                </Border>
+            </DataTemplate>
+            <DataTemplate x:Key="AlbumSenderTemplate">
+                <Border>
+                    <Button 
+                        Command="{Binding GoToAlbumCMD}">
+                        <Border Padding="5">
+                            <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding Album.Name}"/>
+                        </Border>
+                    </Button>
+                </Border>
+            </DataTemplate>
+            <DataTemplate x:Key="TrackNumberTemplate">
+                <Border Padding="5">
+                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding TrackNumber}"/>
+                </Border>
+            </DataTemplate>
+        </Grid.Resources>
+
+        <StackPanel Grid.Row="0" >
+            <!--<Button Width="40" Height="40" Margin="0,0,10,10">
+                    <Image Source="{svgc:SvgImage Source=../Resources/home.svg}"/>
+                </Button>-->
+
+            <TextBlock Text=" Search for some tracks" FontSize="40" FontFamily="Miriam Mono CLM" FontStyle="Italic" Foreground="#FFFBFAFA" FontWeight="Bold" Margin="132,0,0,0"/>
+            <StackPanel Orientation="Horizontal" Margin="160,0,0,0" >
+                <TextBox Width="400" Height="30" FontSize="22" Text="{Binding Query, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Command="{Binding SearchCMD}" Width="20" Height="20" Cursor="Hand" Background="Black" BorderThickness="0" Margin="5,0,0,0">
+                    <Image Source="{svgc:SvgImage Source=../../Resources/search-solid.svg}"/>
+                </Button>
+            </StackPanel>
+
+        </StackPanel>
+
+
+        <DataGrid Grid.Row="2" Grid.Column="0"
+                  x:Name="CategoryPlaylists" 
+                  AutoGenerateColumns="False" Margin="5,5,15,5"
+                  ItemsSource="{Binding Path=SearchedTracks.Result}"
+                  ScrollViewer.CanContentScroll="True"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  Width="855" Foreground="#FF323232">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Track" Width="200" CellTemplate="{StaticResource TrackNameTemplate}"/>
+                <DataGridTemplateColumn Header="Artists" Width="200" CellTemplate="{StaticResource ArtistsSenderTemplate}"/>
+                <DataGridTemplateColumn  Header="Popularity" Width="70" CellTemplate="{StaticResource PopularityTemplate}"/>
+                <DataGridTemplateColumn  Header="Duraration" Width="70" CellTemplate="{StaticResource DurationTemplate}"/>
+                <DataGridTemplateColumn Header="Album" Width="200" CellTemplate="{StaticResource AlbumSenderTemplate}"/>
+                <DataGridTemplateColumn  Header="Track Number" Width="90" CellTemplate="{StaticResource TrackNumberTemplate}"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
     </Grid>
 </UserControl>

@@ -4,9 +4,62 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Spotidity.Views"
+             xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding SearchCMD}" Key="Enter"/>
+    </UserControl.InputBindings>
     <Grid>
-        <TextBlock Text="Search Playlist here"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.Resources>
+            <DataTemplate x:Key="PlaylistSenderTemplate">
+                <Button Content="{Binding Name}"
+                        Command="{Binding GoToPlaylistTracksCMD}"/>
+            </DataTemplate>
+            <DataTemplate x:Key="DescriptionTemplate">
+                <Border Padding="10,0,0,0">
+                    <TextBlock Text="{Binding Path=Description}" TextWrapping="Wrap" MaxWidth="400"/>
+                </Border>
+            </DataTemplate>
+        </Grid.Resources>
+
+        <StackPanel Grid.Row="0" >
+            <!--<Button Width="40" Height="40" Margin="0,0,10,10">
+                    <Image Source="{svgc:SvgImage Source=../Resources/home.svg}"/>
+                </Button>-->
+
+            <TextBlock Text=" Search for some playlists" FontSize="40" FontFamily="Miriam Mono CLM" FontStyle="Italic" Foreground="#FFFBFAFA" FontWeight="Bold" Margin="62,0,0,0"/>
+            <StackPanel Orientation="Horizontal" Margin="90,0,10,0" >
+                <TextBox Width="300" Height="30" FontSize="22" Text="{Binding Query, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Command="{Binding SearchCMD}" Width="20" Height="20" Cursor="Hand" Background="Black" BorderThickness="0" Margin="5,0,0,0">
+                    <Image Source="{svgc:SvgImage Source=../../Resources/search-solid.svg}"/>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+
+        <DataGrid Grid.Row="1" Grid.Column="0"
+                  x:Name="CategoryPlaylists" 
+                  AutoGenerateColumns="False" Margin="5"
+                  ItemsSource="{Binding Path=SearchedPlaylists.Result}"
+                  ScrollViewer.CanContentScroll="True"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                  Width="800">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Name" Width="200"
+                                        CellTemplate="{StaticResource PlaylistSenderTemplate}">
+
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Owner" Binding="{Binding Path=OwnerName}"/>
+                <DataGridTemplateColumn Header="Description" Width="460" CellTemplate="{StaticResource DescriptionTemplate}"/>
+                <!--<DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" MaxWidth="561"/>-->
+            </DataGrid.Columns>
+        </DataGrid>
+
     </Grid>
 </UserControl>

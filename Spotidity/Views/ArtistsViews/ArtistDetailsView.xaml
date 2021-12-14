@@ -1,0 +1,169 @@
+﻿<UserControl x:Class="Spotidity.Views.ArtistDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Spotidity.Views"
+             
+             xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="1000">
+    <Grid>
+        <Grid.Resources>
+            
+
+            <!-- TRACKS TABLE TEMPLATES-->
+            <DataTemplate x:Key="TrackNameTemplate">
+                <Border Padding="5">
+                    <TextBlock Text="{Binding Name}" TextWrapping="Wrap" MaxWidth="190" VerticalAlignment="Center"/>
+                </Border>
+            </DataTemplate>
+            <DataTemplate x:Key="TrackArtistsSenderTemplate">
+                <ComboBox ItemsSource="{Binding Artists}" 
+                          SelectedItem="{Binding SelectedArtist, UpdateSourceTrigger=PropertyChanged}" 
+                          VerticalAlignment="Center" Height="32">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="5">
+                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
+                            </Border>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </DataTemplate>
+            <DataTemplate x:Key="PopularityTemplate">
+                <Border Padding="5">
+                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding Popularity}"/>
+                </Border>
+            </DataTemplate>
+            <DataTemplate x:Key="DurationTemplate">
+                <Border Padding="5">
+                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding DurationStr}"/>
+                </Border>
+            </DataTemplate>
+            <DataTemplate x:Key="TrackNumberTemplate">
+                <Border Padding="5">
+                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding TrackNumber}"/>
+                </Border>
+            </DataTemplate>
+
+            <!-- ALBUMS TABLE TEMPLATES -->
+            <DataTemplate x:Key="NameTemplate">
+                <Button Command="{Binding GoToAlbumTracksCMD}">
+                    <Border Padding="5">
+                        <TextBlock Text="{Binding Path=Name}" TextWrapping="Wrap" MaxWidth="190" VerticalAlignment="Center"/>
+                    </Border>
+                </Button>
+            </DataTemplate>
+            <DataTemplate x:Key="AlbumArtistsSenderTemplate">
+                <ComboBox ItemsSource="{Binding Path=ArtistsCollection}" 
+                          SelectedItem="{Binding SelectedArtist, UpdateSourceTrigger=PropertyChanged}"
+                          VerticalAlignment="Center" Height="32">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="5">
+                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
+                            </Border>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </DataTemplate>
+            <DataTemplate x:Key="ReleaseDateTemplate">
+                <Border Padding="5">
+                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding ReleaseDate}"/>
+                </Border>
+            </DataTemplate>
+            <DataTemplate x:Key="AlbumTypeTemplate">
+                <Border Padding="5">
+                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding AlbumType}"/>
+                </Border>
+            </DataTemplate>
+            <DataTemplate x:Key="AlbumGroupTemplate">
+                <Border Padding="5">
+                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding AlbumGroup}"/>
+                </Border>
+            </DataTemplate>
+            <DataTemplate x:Key="TotalTracksTemplate">
+                <Border Padding="5">
+                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding TotalTracks}"/>
+                </Border>
+            </DataTemplate>
+
+        </Grid.Resources>
+
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding SpotiArtist.Result.DType}"  VerticalAlignment="Center" Foreground="White" FontSize="22" Margin="200,0,0,0"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Text="{Binding SpotiArtist.Result.DName}"  VerticalAlignment="Center" Foreground="White" FontSize="42" Margin="200,0,0,0"/>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding SpotiArtist.Result.GenresStr}" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" FontSize="22" Margin="0,0,200,0"/>
+            
+            <StackPanel Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Orientation="Vertical" MaxWidth="400" HorizontalAlignment="Right"  Margin="0,0,200,0">
+                <TextBlock Text="Followers:   " Foreground="White" FontSize="22" VerticalAlignment="Bottom"/>
+                <TextBlock Text="{Binding SpotiArtist.Result.TotalFollowers}" Foreground="White" FontSize="44" VerticalAlignment="Bottom" />
+            </StackPanel>
+            <!--<StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,200,0">
+                <TextBlock Text="Popularity:   " Foreground="White" FontSize="22" VerticalAlignment="Bottom"/>
+                <TextBlock Text="{Binding SpotiArtist.Result.DPopularity}" Foreground="White" FontSize="44" VerticalAlignment="Bottom"/>
+            </StackPanel>-->
+
+        </Grid>
+
+        <!-- TOP TRACKS -->
+        <DataGrid Grid.Row="1" Grid.Column="0"
+                  HorizontalAlignment="Center"
+                  x:Name="ArtistTopTracks" 
+                  AutoGenerateColumns="False" Margin="5,5,15,5"
+                  ItemsSource="{Binding Path=TopTracks.Result}"
+                  ScrollViewer.CanContentScroll="True"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  Width="460" Foreground="#FF323232"
+                  >
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Top Tracks" Width="140" CellTemplate="{StaticResource TrackNameTemplate}"/>
+                <DataGridTemplateColumn Header="Artists" Width="140" CellTemplate="{StaticResource TrackArtistsSenderTemplate}"/>
+                <DataGridTemplateColumn  Header="Duraration" Width="70" CellTemplate="{StaticResource DurationTemplate}"/>
+                <DataGridTemplateColumn  Header="Track Number" Width="90" CellTemplate="{StaticResource TrackNumberTemplate}"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+        <!-- Artists Albums -->
+        <DataGrid Grid.Row="1" Grid.Column="1"
+                  x:Name="ArtistAlbums" 
+                  AutoGenerateColumns="False" Margin="5,5,15,5"
+                  ItemsSource="{Binding Path=ArtistAlbums.Result}"
+                  ScrollViewer.CanContentScroll="True"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  Width="450" Foreground="#FF323232">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Album" Width="140" CellTemplate="{StaticResource NameTemplate}"/>
+                <DataGridTemplateColumn Header="Artists" Width="140" CellTemplate="{StaticResource AlbumArtistsSenderTemplate}"/>
+                <DataGridTemplateColumn  Header="Release Date" Width="80" CellTemplate="{StaticResource ReleaseDateTemplate}"/>
+                <DataGridTemplateColumn  Header="Album Type" Width="80" CellTemplate="{StaticResource AlbumTypeTemplate}"/>
+                <!--<DataGridTemplateColumn  Header="Total Tracks" Width="90" CellTemplate="{StaticResource TotalTracksTemplate}"/>-->
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+    </Grid>
+</UserControl>

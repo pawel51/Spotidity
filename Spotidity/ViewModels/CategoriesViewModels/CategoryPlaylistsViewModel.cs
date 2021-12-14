@@ -16,9 +16,6 @@ namespace Spotidity.ViewModels
     {
 
 
-        public ICommand GoToCategoriesCMD { get; }
-
-        
         private NotifyTaskCompletion<ObservableCollection<SpotiPlaylist>> _CategoryPlaylists;
         public NotifyTaskCompletion<ObservableCollection<SpotiPlaylist>> CategoryPlaylists
         {
@@ -44,16 +41,13 @@ namespace Spotidity.ViewModels
                     ApiService.GetInstace().GetCategoryPlaylists(spotiCategory.Id)
                 );
 
-            //Categories = SpotiCategory.GetObservableCollection(service.GetCategories().Result);
-            GoToCategoriesCMD = new NavigateCMD<CategoryTableViewModel>(new NavigationService<CategoryTableViewModel>
-                (
-                navigationStore, () => new CategoryTableViewModel()
-                ));
-
-            
+          
             
         }
 
-
+        public override BaseViewModel DeepClone()
+        {
+            return new CategoryPlaylistsViewModel(this.SpotiCategory);
+        }
     }
 }
