@@ -281,7 +281,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Spotidity_TemporaryKey.pfx" />
-    <Resource Include="Services\secrets.json">
+    <Resource Include="Services\secretsBackup.json">
       <Generator>MSBuild:Compile</Generator>
     </Resource>
   </ItemGroup>
