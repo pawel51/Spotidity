@@ -12,13 +12,16 @@ namespace Spotidity.ViewModels
         
         public event PropertyChangedEventHandler PropertyChanged;
 
-        
-
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public abstract BaseViewModel DeepClone();
+
+        internal static BaseViewModel getLog()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

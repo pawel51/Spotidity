@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Spotidity.Services
 {
-    public class NavigationService<TViewModel>
+    public class NavigationService<TViewModel> : INavigattion<TViewModel>
         where TViewModel : BaseViewModel
     {
         private readonly NavigationStore _navigationStore;

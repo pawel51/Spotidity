@@ -12,9 +12,9 @@ namespace Spotidity.Commands
     public class NavigateCMD<TViewModel> : BaseCommand
         where TViewModel : BaseViewModel
     {
-        private readonly NavigationService<TViewModel> navigationService;
+        private readonly INavigattion<TViewModel> navigationService;
 
-        public NavigateCMD(NavigationService<TViewModel> navigationService)
+        public NavigateCMD(INavigattion<TViewModel> navigationService)
         {
             this.navigationService = navigationService;
         }

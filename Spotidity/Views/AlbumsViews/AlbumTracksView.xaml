@@ -17,7 +17,7 @@
                 </Border>
             </DataTemplate>
             <DataTemplate x:Key="ArtistsSenderTemplate">
-                <ComboBox ItemsSource="{Binding Artists}" SelectedItem="{Binding SelectedArtist}" VerticalAlignment="Center" Height="32">
+                <ComboBox ItemsSource="{Binding Artists}" SelectedItem="{Binding SelectedArtist, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="32">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <Border Padding="5">

@@ -142,6 +142,8 @@
     <Compile Include="Services\ApiService.cs" />
     <Compile Include="Services\BackNavigationService.cs" />
     <Compile Include="Services\ForwardNavigationService.cs" />
+    <Compile Include="Services\HistoryProxy.cs" />
+    <Compile Include="Services\INavigattion.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Stores\NavigationStore.cs" />
     <Compile Include="ViewModels\AlbumsViewModels\AlbumsTableViewModel.cs" />
@@ -314,6 +316,10 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Docs\screen1.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

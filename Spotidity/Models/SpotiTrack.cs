@@ -84,13 +84,21 @@ namespace Spotidity.Models
 
             NavigationStore navigationStore = NavigationStore.GetInstace();
             //goto artist
-            NavigationService<ArtistDetailsViewModel> navigationArtistsService = new NavigationService<ArtistDetailsViewModel>(
+            //NavigationService<ArtistDetailsViewModel> navigationArtistsService = new NavigationService<ArtistDetailsViewModel>(
+            //    navigationStore, () => new ArtistDetailsViewModel(this.SelectedArtist.Id));
+
+            INavigattion<ArtistDetailsViewModel> navigationArtistsService = new HistoryProxy<ArtistDetailsViewModel>(
                 navigationStore, () => new ArtistDetailsViewModel(this.SelectedArtist.Id));
+
             GoToArtistCMD = new NavigateCMD<ArtistDetailsViewModel>(navigationArtistsService);
 
             //goto album
-            NavigationService<AlbumTracksViewModel> navigationAlbumsService = new NavigationService<AlbumTracksViewModel>(
+            //NavigationService<AlbumTracksViewModel> navigationAlbumsService = new NavigationService<AlbumTracksViewModel>(
+            //    navigationStore, () => new AlbumTracksViewModel(this.Album.Id));
+
+            INavigattion<AlbumTracksViewModel> navigationAlbumsService = new HistoryProxy<AlbumTracksViewModel>(
                 navigationStore, () => new AlbumTracksViewModel(this.Album.Id));
+
             GoToAlbumCMD = new NavigateCMD<AlbumTracksViewModel>(navigationAlbumsService);
 
         }
